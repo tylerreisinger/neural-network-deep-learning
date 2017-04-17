@@ -2,6 +2,8 @@ extern crate rand;
 extern crate byteorder;
 
 pub mod mnist;
+pub mod net;
+pub mod math;
 
 use std::path::Path;
 use mnist::idx;
