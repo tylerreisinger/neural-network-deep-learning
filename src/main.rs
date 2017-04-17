@@ -4,14 +4,12 @@ extern crate byteorder;
 pub mod mnist;
 
 use std::path::Path;
-use std::io;
-use mnist::image;
+use mnist::idx;
 
 fn main() {
-    let mut reader = image::ImageReader::new(&Path::new("data/train-images-idx3-ubyte"))
-                     .unwrap();
+    let labels = 
+        idx::IdxReader::from_file(&Path::new("data/train-labels-idx1-ubyte")).unwrap();
+    let images = 
+        idx::IdxReader::from_file(&Path::new("data/train-images-idx3-ubyte")).unwrap();
 
-    for (i, img) in reader.images().enumerate() {
-        println!("{}", i); 
-    }
 }

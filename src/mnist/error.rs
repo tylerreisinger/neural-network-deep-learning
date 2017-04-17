@@ -8,6 +8,7 @@ use std::fmt::Display;
 pub enum MnistError {
     Io(io::Error),
     InvalidFormat,
+    InvalidElementType,
     Parse(),
 }
 
@@ -25,6 +26,8 @@ impl Display for MnistError {
             MnistError::Io(ref err) => write!(f, "{}", err),
             MnistError::InvalidFormat => 
                 write!(f, "{}", self.description()),
+            MnistError::InvalidElementType => 
+                write!(f, "{}", self.description()),
             MnistError::Parse() =>
                 write!(f, "Parse error"),
         }
@@ -36,6 +39,8 @@ impl Error for MnistError {
         match *self {
             MnistError::Io(ref err) => err.description(),
             MnistError::InvalidFormat => "Invalid format",
+            MnistError::InvalidElementType => 
+                "Invalid type constant for idx elements",
             MnistError::Parse() => "Unable to parse",
         }
     }
@@ -44,6 +49,7 @@ impl Error for MnistError {
         match *self {
             MnistError::Io(ref err) => Some(err),
             MnistError::InvalidFormat => None,
+            MnistError::InvalidElementType => None,
             MnistError::Parse() => None,
         }
     }
